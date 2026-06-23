@@ -1,0 +1,15 @@
+# Core numeric/data stack. Keep NumPy on the stable 1.x ABI for binary
+# compatibility across sklearn/scipy/catboost/interpret on macOS.
+numpy>=1.26,<2.0
+pandas>=2.2,<3.0
+scipy>=1.13,<2.0
+scikit-learn>=1.6,<1.9
+
+# Paper-screened model families.
+catboost>=1.2,<2.0
+interpret>=0.7,<0.8
+torch>=2.6,<3.0
+
+# Plotting/reporting.
+matplotlib>=3.9,<4.0
+tqdm>=4.66,<5.0
