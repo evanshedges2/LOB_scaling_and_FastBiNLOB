@@ -1,0 +1,103 @@
+{
+  "experiment": "setup2_full144_paper_core_cpu_latency_v1",
+  "window": 128,
+  "feature_mode": "full144",
+  "base_d": 144,
+  "horizons": [
+    "y_10",
+    "y_20",
+    "y_50",
+    "y_100"
+  ],
+  "training": {
+    "device": "cpu",
+    "timing_device": "cpu",
+    "optimizer": "adam",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0,
+    "adam_eps": 1e-08,
+    "batch_size": 32,
+    "eval_batch_size": 64,
+    "epochs": 1,
+    "patience": 1,
+    "min_delta": 1e-05,
+    "selection_metric": "validation_macro_f1",
+    "validation_fraction": 0.2,
+    "seed": 0,
+    "dropout": 0.1,
+    "use_bin": true,
+    "bin_eps": 1e-05
+  },
+  "latency": {
+    "timing_devices": [
+      "cpu"
+    ],
+    "repeats": 5,
+    "single_timing_samples": 512,
+    "synthetic_rows": 1024
+  },
+  "candidates": [
+    {
+      "lane": "paper_core_baseline",
+      "feature_mode": "full144",
+      "architecture": "official_mlplob",
+      "name": "paper_core_official_mlplob_H144_L3_W128",
+      "hidden_dim": 144,
+      "layers": 3
+    },
+    {
+      "lane": "paper_core_baseline",
+      "feature_mode": "full144",
+      "architecture": "tlob",
+      "name": "paper_core_tlob_H16_L1_A4_F2_D005_W128",
+      "hidden_dim": 16,
+      "layers": 1,
+      "heads": 4,
+      "ff_multiplier": 2,
+      "dropout": 0.05
+    },
+    {
+      "lane": "paper_core_fastbin",
+      "feature_mode": "full144",
+      "architecture": "multitask_fastbinlob",
+      "name": "paper_core_fastbin_H96_L2_TE4_FE1_SIMPLE_MEAN_ADAM_EMA_LA05_GELU_D005_HH96_W128",
+      "hidden_dim": 96,
+      "layers": 2,
+      "temporal_expansion": 4,
+      "feature_expansion": 1,
+      "block_norm": "none",
+      "final_norm": "none",
+      "activation": "gelu",
+      "dropout": 0.05,
+      "head_hidden": 96,
+      "gated_residual": false,
+      "input_norm": "simple_bin",
+      "pooling": "mean",
+      "loss_type": "logit_adjusted_ce",
+      "logit_adjust_tau": 0.5,
+      "class_weighting": "none"
+    },
+    {
+      "lane": "paper_core_fastbin",
+      "feature_mode": "full144",
+      "architecture": "multitask_fastbinlob",
+      "name": "paper_core_fastbin_H120_L2_TE10_FE1_SIMPLE_TAPER_ADAM_EMA_LA05_GELU_D005_HH120_W128",
+      "hidden_dim": 120,
+      "layers": 2,
+      "temporal_expansion": 10,
+      "feature_expansion": 1,
+      "block_norm": "none",
+      "final_norm": "none",
+      "activation": "gelu",
+      "dropout": 0.05,
+      "head_hidden": 120,
+      "gated_residual": false,
+      "input_norm": "simple_bin",
+      "pooling": "taper",
+      "taper_norm": false,
+      "loss_type": "logit_adjusted_ce",
+      "logit_adjust_tau": 0.5,
+      "class_weighting": "none"
+    }
+  ]
+}

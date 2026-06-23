@@ -1,0 +1,82 @@
+{
+  "experiment": "setup2_full144_h96_mean_core",
+  "evaluation_setup": "setup2_7d_3d",
+  "cf": 7,
+  "setup2_train_cf": 7,
+  "setup2_test_cfs": [7, 8, 9],
+  "preserve_day_boundaries": true,
+  "window": 128,
+  "feature_mode": "full144",
+  "base_d": 144,
+  "horizons": ["y_10", "y_20", "y_50", "y_100"],
+  "training": {
+    "device": "auto",
+    "timing_device": "cpu",
+    "optimizer": "adam",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0,
+    "adam_eps": 1e-8,
+    "ema_decay": 0.999,
+    "batch_size": 32,
+    "eval_batch_size": 64,
+    "epochs": 50,
+    "patience": 15,
+    "min_delta": 1e-5,
+    "selection_metric": "validation_macro_f1_mean",
+    "validation_fraction": 0.2,
+    "seed": 0,
+    "dropout": 0.1,
+    "use_bin": true,
+    "bin_eps": 1e-5,
+    "per_horizon_checkpointing": true,
+    "class_prior_smoothing": 1.0,
+    "class_weight_cap": 5.0,
+    "effective_beta": 0.999,
+    "horizon_loss_weights": [1.0, 1.0, 1.0, 1.0],
+    "decision_calibration": {
+      "enabled": true,
+      "grid_min": -0.8,
+      "grid_max": 0.8,
+      "grid_steps": 17
+    },
+    "finetune": {
+      "enabled": true,
+      "mode": "all",
+      "epochs": 10,
+      "patience": 4,
+      "learning_rate": 2e-5,
+      "optimizer": "adam",
+      "weight_decay": 0.0,
+      "batch_size": 32
+    }
+  },
+  "latency": {
+    "timing_devices": ["cpu"],
+    "repeats": 3,
+    "single_timing_samples": 256,
+    "synthetic_rows": 512
+  },
+  "candidates": [
+    {
+      "lane": "setup2_full144_h96_mean_core",
+      "feature_mode": "full144",
+      "architecture": "multitask_fastbinlob",
+      "name": "full144_fastbinlob_H96_L2_TE4_FE1_SIMPLE_MEAN_LA05_GELU_D005_HH96_W128",
+      "hidden_dim": 96,
+      "layers": 2,
+      "temporal_expansion": 4,
+      "feature_expansion": 1,
+      "block_norm": "none",
+      "final_norm": "none",
+      "activation": "gelu",
+      "dropout": 0.05,
+      "head_hidden": 96,
+      "gated_residual": false,
+      "input_norm": "simple_bin",
+      "pooling": "mean",
+      "loss_type": "logit_adjusted_ce",
+      "logit_adjust_tau": 0.5,
+      "class_weighting": "none"
+    }
+  ]
+}
