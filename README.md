@@ -1,6 +1,6 @@
 # Inference-Compute Frontiers for Limit Order Book Prediction
 
-Code for reproducing the paper-required FI-2010 experiments behind the raw40 inference-compute frontier and the full144 FastBiNLOB latency results. This is a small methods bundle, not a full project archive.
+Code for reproducing the results of https://arxiv.org/abs/2606.25986.
 
 The raw40 lane runs the screened frontier families from the paper: decision trees, histogram gradient boosting, EBM, CatBoost, random-conv logistic, small neural screened rows, and held-out MLPLOB targets. The full144 lane trains the two FastBiNLOB paper operating points and times the MLPLOB/TLOB/FastBiNLOB latency anchors.
 
