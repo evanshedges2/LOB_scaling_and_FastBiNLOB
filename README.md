@@ -2,6 +2,8 @@
 
 Code for reproducing the results of https://arxiv.org/abs/2606.25986.
 
+1-Pager can be found here: https://github.com/evanshedges2/LOB_scaling_and_FastBiNLOB/blob/main/LOB%20Scaling%20Law%20One%20Pager.pdf 
+
 The raw40 lane runs the screened frontier families from the paper: decision trees, histogram gradient boosting, EBM, CatBoost, random-conv logistic, small neural screened rows, and held-out MLPLOB targets. The full144 lane trains the two FastBiNLOB paper operating points and times the MLPLOB/TLOB/FastBiNLOB latency anchors.
 
 ## Setup
